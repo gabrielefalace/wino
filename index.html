@@ -8,7 +8,9 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Chivo:wght@300&display=swap" rel="stylesheet">
-
+  <link rel="preconnect" href="https://fonts.gstatic.com"> 
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 
   <style>
@@ -49,11 +51,16 @@
     }
 
     .button-large {
+      border-radius: 25px;
       font-weight: 500;
       font-size: 1.4rem;
       height: 4.5rem;
       line-height: 4.5rem;
       padding: 0 2rem;
+    }
+
+    #recipe_text {
+      border-radius: 25px;
     }
 
     .button-red:hover {
@@ -73,7 +80,7 @@
     }
 
     body {
-      font-family: 'Chivo';
+      font-family: 'Inter';
     }
 
     .result-text {
@@ -85,6 +92,19 @@
       padding-top: 2%;
     }
 
+    #buttonHolder {
+      text-align: center;
+    }
+
+    .heading {
+      text-align: center;
+      font-family: 'Josefin Sans', sans-serif;
+    }
+
+    .title {
+      font-size: 8rem;
+    }
+
   </style>
   <title>Wino</title>
 
@@ -94,18 +114,16 @@
   <main class="wrapper">
     <nav class='navbar'>
       <ul>
-        <li><a id="tab_home" class="active" href="#home">Home</a></li>
-        <li><a id="tab_try" href="#try">Try it</a></li>
-        <li><a id="tab_team"  href="#team">Team</a></li>
+        <li><a class="heading" id="tab_try" href="#try">Wino</a></li>
+        <li><a class="heading" id="tab_home" class="active" href="#home">Home</a></li>
+        <li><a class="heading" id="tab_team"  href="#team">Team</a></li>
       </ul>
     </nav>
     <section>
-
-
         <div class="row" id="about">
           <div class="column column-10"></div>
           <div class="column column-70">
-            <h1>The wine recommendation engine.</h1>
+            <h1 class="heading">The wine recommendation engine.</h1>
             <p>
               Wino is the THE wine recommendation engine. Based on an maniacally detailed database of wines and their properties and combined with intelligence vetted by our wine expert, it provides you the best in class advice for your meal.
             </p>
@@ -114,25 +132,27 @@
         </div>
 
         <div class="row" id="try">
-          <div class="column column-10"></div>
+          <div class="column column-15"></div>
           <div class="column column-70">
-            <h1>Try it out</h1>
+            <h1 class="heading title">Wino</h1>
             <form>
               <fieldset>
-                <textarea placeholder="Describe your meal e.g. pasta alla carbonara"   id="recipe_text"></textarea>
+                <input placeholder="Describe your meal or list the ingredients" id="recipe_text"></input>
               </fieldset>
             </form>
-            <button id="matchBtn" class="button-large button-red">Match a Wine</button>
+            <div id="buttonHolder">
+              <button id="matchBtn" class="button-large button-red heading">Find</button>
+            </div>
             <div id="result">
             </div>
           </div>
-          <div class="column column-20"></div>
+          <div class="column column-15"></div>
         </div>
 
         <div class="row" id="team">
           <div class="column column-10"></div>
           <div class="column column-70">
-            <h1>The Team</h1>
+            <h1 class="heading">The team</h1>
           </div>
           <div class="column column-20"></div>
         </div>
@@ -203,6 +223,7 @@
       $("#suggestedWine").addClass("result-text")  
     })
     
+    $("#tab_try").click();
   </script>
 </body>
 
