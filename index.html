@@ -94,9 +94,9 @@
   <main class="wrapper">
     <nav class='navbar'>
       <ul>
-        <li><a class="active" href="#home">Home</a></li>
-        <li><a href="#try">Try it</a></li>
-        <li><a href="#team">Team</a></li>
+        <li><a id="tab_home" class="active" href="#home">Home</a></li>
+        <li><a id="tab_try" href="#try">Try it</a></li>
+        <li><a id="tab_team"  href="#team">Team</a></li>
       </ul>
     </nav>
     <section>
@@ -113,7 +113,7 @@
           <div class="column column-20"></div>
         </div>
 
-        <div class="row" id="try<">
+        <div class="row" id="try">
           <div class="column column-10"></div>
           <div class="column column-70">
             <h1>Try it out</h1>
@@ -169,6 +169,28 @@
   </main>
 
   <script>
+    $("#tab_home").click(function(home){
+      $("#about").show();
+      $("#try").hide();
+      $("#team-members").hide();
+      $("#team").hide();
+    });
+
+    $("#tab_try").click(function(home){
+      $("#about").hide();
+      $("#try").show();
+      $("#team-members").hide();
+      $("#team").hide();
+    });
+
+    $("#tab_team").click(function(home){
+      $("#about").hide();
+      $("#try").hide();
+      $("#team-members").show();
+      $("#team").show();
+    });
+
+
     $("#recipe_text").click(function(){
       $("#result").html("");
       $("#recipe_text").val("");
@@ -180,6 +202,7 @@
       $("#result").html('<div> <i class="fas fa-wine-bottle fa-3x"> </i> <span id="suggestedWine"> Magliocco <span> </div>');
       $("#suggestedWine").addClass("result-text")  
     })
+    
   </script>
 </body>
 
