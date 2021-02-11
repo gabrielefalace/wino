@@ -113,7 +113,7 @@
 
             function pair(input) {
                 // var input = JSON.stringify(document.getElementById("recipe_text").value);
-                wines = ["Bardolino", "Nero d'Avola", "Syrah", "Sagrantino"] // call actual backend here 
+                wines = fetchWines(); // ["Bardolino", "Nero d'Avola", "Syrah", "Sagrantino"] // call actual backend here 
                 content = ''
                 wines.forEach(element => {
                   content += buildCard(element);
@@ -126,7 +126,26 @@
             }
 
             function buildCard(wine) {
-                return '<div class="card">' + wine + '</div>';
+                return '<div class="card">' + wine.name +" ("+ wine.alcohol + "%) <br/> " + wine.description + '</div>';
+            }
+
+            function fetchWines() {
+                wines = [];
+                $.ajax( {
+                    type:'Get',
+                    url:'https://winot.herokuapp.com/match',
+                    success:function(data) {
+                        wines = data;
+                    }
+                });
+                return wines;
+                return [
+                    {"name":"Magliocco","description":"GOOD","alcohol":12.9},
+                    {"name":"Bardolino","description":"SUPER","alcohol":13.0},
+                    {"name":"Barolo","description":"TASTY","alcohol":15.0},
+                    {"name":"Lambrusco","description":"SO SO","alcohol":13.5},
+                    {"name":"Alezio","description":"UNKNOWN","alcohol":12.0}
+                ];
             }
         </script>
     </body>
