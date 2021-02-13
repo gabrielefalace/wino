@@ -83,7 +83,7 @@
                 }
             }
 
-            #recipe_text:focus{
+            #recipe_text:focus, #email:focus, #password:focus{
                 border-color: #e3354c;
             }
 
@@ -158,8 +158,7 @@
             });
 
             function pair(input) {
-                // var input = JSON.stringify(document.getElementById("recipe_text").value);
-                wines = fetchWines(); // ["Bardolino", "Nero d'Avola", "Syrah", "Sagrantino"] // call actual backend here 
+                wines = fetchWines(); 
                 content = ''
                 wines.forEach(element => {
                   content += buildCard(element);
