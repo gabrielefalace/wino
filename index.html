@@ -141,6 +141,14 @@
             })();
 
             $("#btn-access").click(function(){
+                var emailValue = $("#email").value
+                var passwordValue = $("#password").value
+                var data = {email: emailValue, password: passwordValue}
+                $.post("http://authwino.herokuapp.com/login", data, function(d){
+                    console.log("Received: "+d);
+                    sessionStorage.setItem("wqthv", d);
+                }, "text");
+
                 $("#results").hide();
                 $("#access").hide();
                 $("#search").show();
