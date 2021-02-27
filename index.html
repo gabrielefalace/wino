@@ -151,14 +151,16 @@
                     success: function(data){
                                 console.log("Received: "+ JSON.stringify(data));
                                 sessionStorage.setItem("token", data);
+                                $("#results").hide();
+                                $("#access").hide();
+                                $("#search").show();
                              },
+                    error: function(xhr, status, err){
+                        alert("Error " + status + ": "+console.err);
+                    },
                     contentType: "application/json",
                     type: "POST"
                 });
-
-                $("#results").hide();
-                $("#access").hide();
-                $("#search").show();
             });
 
             $("#searchForm").submit(function() {
