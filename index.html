@@ -141,8 +141,8 @@
             })();
 
             $("#btn-access").click(function(){
-                var emailValue = $("#email").value
-                var passwordValue = $("#password").value
+                var emailValue = $("#email").val();
+                var passwordValue = $("#password").val();
                 var data = '{"email": "'+emailValue+'", password: "'+passwordValue+'"}'
                 console.log("Sending: "+ JSON.stringify(data))
                 $.post("http://authwino.herokuapp.com/login", data, function(d){
