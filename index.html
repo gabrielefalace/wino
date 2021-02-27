@@ -141,14 +141,16 @@
             })();
 
             $("#btn-access").click(function(){
-                var emailValue = $("#email").val();
-                var passwordValue = $("#password").val();
-                var data = '{"email": "'+emailValue+'", password: "'+passwordValue+'"}'
-                console.log("Sending: "+ JSON.stringify(data))
-                $.post("http://authwino.herokuapp.com/login", data, function(d){
-                    console.log("Received: "+ JSON.stringify(d));
-                    sessionStorage.setItem("wqthv", d);
-                }, "text");
+                
+                $.post("http://authwino.herokuapp.com/login", 
+                {
+                    email: $("#email").val(),
+                    password: $("#password").val()
+                }, 
+                function(data){
+                    console.log("Received: "+ JSON.stringify(data));
+                    sessionStorage.setItem("token", data);
+                });
 
                 $("#results").hide();
                 $("#access").hide();
