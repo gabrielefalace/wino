@@ -143,9 +143,10 @@
             $("#btn-access").click(function(){
                 var emailValue = $("#email").value
                 var passwordValue = $("#password").value
-                var data = {email: emailValue, password: passwordValue}
+                var data = '{"email": "'+emailValue+'", password: "'+passwordValue+'"}'
+                console.log("Sending: "+ JSON.stringify(data))
                 $.post("http://authwino.herokuapp.com/login", data, function(d){
-                    console.log("Received: "+d);
+                    console.log("Received: "+ JSON.stringify(d));
                     sessionStorage.setItem("wqthv", d);
                 }, "text");
 
