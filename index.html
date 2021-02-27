@@ -143,17 +143,17 @@
             $("#btn-access").click(function(){
 
                 $.ajax({
-                    type: "POST",
                     url: "https://authwino.herokuapp.com/login",
+                    data: JSON.stringify({
+                            email: $("#email").val(),
+                            password: $("#password").val()
+                          }),
                     success: function(data){
                                 console.log("Received: "+ JSON.stringify(data));
                                 sessionStorage.setItem("token", data);
                              },
                     contentType: "application/json",
-                    data: {
-                            email: $("#email").val(),
-                            password: $("#password").val()
-                          }
+                    type: "POST"
                 });
 
                 $("#results").hide();
