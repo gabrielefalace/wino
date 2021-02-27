@@ -142,14 +142,18 @@
 
             $("#btn-access").click(function(){
 
-                $.post("https://authwino.herokuapp.com/login", 
-                {
-                    email: $("#email").val(),
-                    password: $("#password").val()
-                }, 
-                function(data){
-                    console.log("Received: "+ JSON.stringify(data));
-                    sessionStorage.setItem("token", data);
+                $.ajax({
+                    type: "POST",
+                    url: "https://authwino.herokuapp.com/login",
+                    success: function(data){
+                                console.log("Received: "+ JSON.stringify(data));
+                                sessionStorage.setItem("token", data);
+                             },
+                    contentType: "Content-Type: application/json",
+                    data: {
+                            email: $("#email").val(),
+                            password: $("#password").val()
+                          }
                 });
 
                 $("#results").hide();
