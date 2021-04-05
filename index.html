@@ -150,7 +150,7 @@
                           }),
                     success: function(data){
                                 console.log("Received: "+ JSON.stringify(data));
-                                sessionStorage.setItem("token", data);
+                                sessionStorage.setItem("zibib", data);
                                 $("#results").hide();
                                 $("#access").hide();
                                 $("#search").show();
@@ -171,7 +171,17 @@
             $(".title").click(function(e){
                 // e.preventDefault();
                 console.log("in the function");
-                window.location.reload(); 
+                if(!sessionStorage.getItem('zibib')) {
+                    window.location.reload();
+                }
+                else {
+                    $("#results").hide();
+                    $("#access").hide();
+                    $("#recipe_text").val("");
+                    $("#search").show();
+                    $("#searchForm").show();
+                }
+
             });
 
             function pair(input) {
