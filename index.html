@@ -190,7 +190,7 @@
                 wines.forEach(element => {
                   content += buildCard(element);
                 });
-                console.log(content);
+                console.log("content: " + content);
                 $("#wineList").html(content);
                 $("#results").show();
                 $("#search").hide();
@@ -198,7 +198,8 @@
             }
 
             function buildCard(wine) {
-                return '<div class="card">' + wine.name +" ("+ wine.alcohol + "%) <br/> " + wine.description + '</div>';
+                console.log("wine in buildcard: " + wine)
+                return '<div class="card">' + wine.name +' ('+ wine.alcohol + '%) <br/> ' + wine.description + '</div>';
             }
 
             function fetchWines() {
@@ -214,6 +215,7 @@
                         wines = data;
                     }
                 });
+                console.log("wines in callback: " + wines)
                 return wines;
             }
         </script>
