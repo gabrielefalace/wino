@@ -206,6 +206,9 @@
                 $.ajax( {
                     type:'Get',
                     url:'https://winot.herokuapp.com/match',
+                    headers: {
+                        'authorization': 'bearer ' + sessionStorage.getItem("zibib")
+                    },
                     success:function(data) {
                         wines = data;
                     }
