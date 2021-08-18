@@ -205,7 +205,7 @@
                 wines = [];
                 $.ajax( {
                     type:'Get',
-                    url:'https://winot.herokuapp.com/match',
+                    url:'https://winot.herokuapp.com/match?foodDescription=' + $("#recipe_text").val(),
                     headers: {
                         'authorization': 'bearer ' + sessionStorage.getItem("zibib")
                     },
