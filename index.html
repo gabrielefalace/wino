@@ -209,10 +209,9 @@
                     success: function(data){
                                 sessionStorage.setItem("zibib", data);
                                 $("#results").hide();
-                                $("#access").hide();
+                                $("#access").show();
                                 $("#register").hide();
-                                $("#search").show();
-                                $("#searchForm").show();
+                                $("#search").hide();
                              },
                     error: function(xhr, status, err){
                         alert("Error " + status + ": "+console.err);
