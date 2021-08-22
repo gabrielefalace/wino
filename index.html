@@ -161,6 +161,11 @@
             </div>
             <div class="pure-u-1-3"></div>
         </div>
+
+
+
+
+
         <script>
             (function initState(){
                 $("#results").hide();
@@ -178,10 +183,7 @@
                           }),
                     success: function(data){
                                 sessionStorage.setItem("zibib", data);
-                                $("#results").hide();
-                                $("#register").hide();
-                                $("#access").hide();
-                                $("#search").show();
+                                showOnly(["search"]);                                
                              },
                     error: function(xhr, status, err){
                         alert("Error " + status + ": "+console.err);
@@ -208,10 +210,7 @@
                           }),
                     success: function(data){
                                 sessionStorage.setItem("zibib", data);
-                                $("#results").hide();
-                                $("#access").show();
-                                $("#register").hide();
-                                $("#search").hide();
+                                showOnly(["access"]);
                              },
                     error: function(xhr, status, err){
                         alert("Error " + status + ": "+console.err);
@@ -231,34 +230,20 @@
                     window.location.reload();
                 }
                 else {
-                    $("#results").hide();
-                    $("#access").hide();
-                    $("#register").hide();
                     $("#recipe_text").val("");
-                    $("#search").show();
-                    $("#searchForm").show();
+                    showOnly(["search", "searchForm"]);
                 }
 
             });
 
             $("#lnk-register").click(function(){
                 $("#wineList").html("");
-                $("#wineList").hide();
-                $("#results").hide();
-                $("#search").hide();
-                $("#searchForm").hide();
-                $("#access").hide();
-                $("#register").show();
+                showOnly(["register"]);
             });
 
             $("#lnk-login").click(function(){
                 $("#wineList").html("");
-                $("#wineList").hide();
-                $("#results").hide();
-                $("#search").hide();
-                $("#searchForm").hide();
-                $("#access").show();
-                $("#register").hide();
+                showOnly(["access"]);
             });
 
             function pair(input) {
@@ -268,11 +253,8 @@
                   content += buildCard(element);
                 });
                 $("#wineList").html(content);
-                $("#results").show();
-                $("#search").hide();
-                $("#searchForm").hide();
-                $("#register").hide();
-                $("#access").hide();
+                
+                showOnly(["results"]);
             }
 
             function buildCard(wine) {
@@ -293,6 +275,16 @@
                     }
                 });
                 return wines;
+            }
+
+            function showOnly(divs) {
+                var allDivs = ["access", "register", "search", "results"];
+                allDivs.forEach(function(d){
+                    if(divs.indexOf(d) >= 0) {
+                        $("#"+d).show();
+                    }
+                    else $("#"+d).hide();
+                });
             }
         </script>
     </body>
