@@ -1,5 +1,6 @@
 <html>
     <head>  
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍷</text></svg>">
         <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.5/build/base-min.css">
         <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.5/build/grids-min.css">
         <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.5/build/grids-responsive-min.css">
@@ -111,6 +112,11 @@
                 border: 0.1rem solid #d1d1d1;
                 border-radius: 25px;
             }
+            h5 {
+                padding: 20px;
+                margin: 20px;
+            }
+            
         </style>
     </head>
     <body>  
@@ -272,7 +278,9 @@
                   content += buildCard(element);
                 });
                 if(content === '') {
-                    content = "No results... try again!"
+                    content = "No results... click on the logo and try again!"
+                } else {
+                    content = '<h5>Pairing for: <i>"'+$("#recipe_text").val()+'"</i></h5>' + content
                 }
                 $("#wineList").html(content);
                 
