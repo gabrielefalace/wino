@@ -271,13 +271,17 @@
                 wines.forEach(element => {
                   content += buildCard(element);
                 });
+                if(content === '') {
+                    content = "No results... try again!"
+                }
                 $("#wineList").html(content);
                 
                 showOnly(["results"]);
             }
 
             function buildCard(wine) {
-                return '<div class="card">' + wine.name +' ('+ wine.alcohol + '%) <br/> ' + wine.description + '</div>';
+                var region = "Europe"; // wine.region
+                return '<div class="card"> <b>' + wine.name +'</b> <br/> ' + wine.category + ' - ' + wine.sweetness + ' - ' + wine.style + ' - ' + region + '</div>';
             }
 
             function fetchWines() {
