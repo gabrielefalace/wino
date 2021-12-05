@@ -273,8 +273,8 @@
 
             $(".fb-login-button").click(function(){
                 FB.login(function(response){
-                        alert("Logged in!!!")
-                    });
+                    console.log(JSON.stringify(response));
+                });
             });
 
             function pair(input) {
@@ -294,7 +294,8 @@
             }
 
             function buildCard(wine) {
-                return '<div class="card"> <b>' + wine.name +'</b> <br/> ' + wine.category + ' - ' + wine.sweetness + ' - ' + wine.style + ' - ' + wine.region + '</div>';
+                var region = wine.region
+                return '<div class="card"> <b>' + wine.name +'</b> <br/> ' + wine.category + ' - ' + wine.sweetness + ' - ' + wine.style + ' - ' + region + '</div>';
             }
 
             function fetchWines() {
