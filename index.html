@@ -275,13 +275,17 @@
             });
 
             $(".fb-login-button").click(function(){
-                FB.login(function(response){
-                    if (response.authResponse) {
-                        window.location='https://gabrielefalace.github.io/wino'
-                    } else {
-                        console.log('User cancelled login or did not fully authorize.');
-                    }
+                console.log("In the func...");
+                sleep(10000).then( () => {
+                    FB.login(function(response){
+                        if (response.authResponse) {
+                            window.location='https://gabrielefalace.github.io/wino'
+                        } else {
+                            console.log('User cancelled login or did not fully authorize.');
+                        }
+                    });
                 });
+                
             });
 
             function pair(input) {
