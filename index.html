@@ -274,19 +274,7 @@
                 showOnly(["bar", "access"]);
             });
 
-            $(".fb-login-button").click(function(){
-                console.log("In the func...");
-                sleep(10000).then( () => {
-                    FB.login(function(response){
-                        if (response.authResponse) {
-                            window.location='https://gabrielefalace.github.io/wino'
-                        } else {
-                            console.log('User cancelled login or did not fully authorize.');
-                        }
-                    });
-                });
-                console.log("This should be printed later on, right?");
-            });
+            
 
             function pair(input) {
                 wines = fetchWines(); 
@@ -341,5 +329,16 @@
                 crossorigin="anonymous"
                 src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v12.0&appId=1273416273099991&autoLogAppEvents=1" 
                 nonce="VE1GYhZE">
+
+                $(".fb-login-button").click( () => {
+                    FB.login(function(response){
+                        if (response.authResponse) {
+                            window.location='https://gabrielefalace.github.io/wino'
+                        } else {
+                            console.log('User cancelled login or did not fully authorize.');
+                        }
+                    });
+                });
+
         </script>
 </html>
