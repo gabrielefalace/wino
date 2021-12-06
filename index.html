@@ -198,6 +198,9 @@
 
         <script>
             (function initState(){
+                FB.getLoginStatus(function(response) {
+                    console.log(JSON.stringify(response.status));
+                });
                 showOnly(["bar", "access"])
             })();
 
