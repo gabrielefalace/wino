@@ -120,6 +120,24 @@
         </style>
     </head>
     <body>  
+
+        <script>
+            function checkLoginState() {               // Called when a person is finished with the Login Button.
+                FB.getLoginStatus(function(response) {   // See the onlogin handler
+                    window.location = 'https://gabrielefalace.github.io/wino';
+                });
+            }
+
+            window.fbAsyncInit = function() {
+                FB.init({
+                appId      : '1273416273099991',
+                cookie     : true,                     // Enable cookies to allow the server to access the session.
+                xfbml      : true,                     // Parse social plugins on this webpage.
+                version    : 'v12.0'           // Use this Graph API version for this call.
+                });
+            }
+        </script>
+
         <div id="bar" class="pure-g">
             <div class="pure-u-12-24 pure-u-md-12-24"></div>
  
@@ -133,9 +151,6 @@
             <div class="pure-u-8-24 pure-u-md-8-24">
             </div>
         </div>
-
-        
-
 
         <div id="title_box" class="pure-g">
             <div class="pure-u-1-5 pure-u-md-1-3"></div>
@@ -154,10 +169,13 @@
                 <input type="email" placeholder="email" id="email" required></input>
                 <input type="password" placeholder="password" id="password" required></input>
                 <button id="btn-access" class="button">Sign in</button> 
-                <div class="fb-login-button" data-width="" data-size="large" 
-                     data-button-type="continue_with" data-layout="rounded" 
-                     data-auto-logout-link="false" data-use-continue-as="true">
-                </div>
+                
+
+                <fb:login-button scope="public_profile,email" 
+                onlogin="checkLoginState();" class="fb-login-button" data-width="" data-size="large" 
+                data-button-type="continue_with" data-layout="rounded" 
+                data-auto-logout-link="false" data-use-continue-as="true">
+                    </fb:login-button>
             </div>
             <div class="pure-u-1-5 pure-u-md-1-3">  </div>
         </div>
@@ -193,29 +211,12 @@
         </div>
 
         
+        <!-- Load the JS SDK asynchronously -->
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>   
     </body>
-    <div id="fb-root"></div>
-    <script async defer 
-                crossorigin="anonymous"
-                src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v12.0&appId=1273416273099991&autoLogAppEvents=1" 
-                nonce="VE1GYhZE">
-
-                $(".fb-login-button").click( () => {
-                    FB.login(function(response){
-                        if (response.authResponse) {
-                            window.location='https://gabrielefalace.github.io/wino'
-                        } else {
-                            console.log('User cancelled login or did not fully authorize.');
-                        }
-                    });
-                });
-    </script>
     <script>
         (function initState(){
             showOnly(["bar", "access"])
-            FB.getLoginStatus(function(response) {
-                console.log(JSON.stringify(response));
-            });
         })();
 
         $("#btn-access").click(function(){
