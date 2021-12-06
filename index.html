@@ -124,8 +124,7 @@
         <script>
             function checkLoginState() {               // Called when a person is finished with the Login Button.
                 FB.getLoginStatus(function(response) {   // See the onlogin handler
-                    alert(response.status);
-                    console.log(JSON.stringify(response));
+                    window.location = 'https://gabrielefalace.github.io/wino';
                 });
             }
 
@@ -216,9 +215,6 @@
     <script>
         (function initState(){
             showOnly(["bar", "access"])
-            FB.getLoginStatus(function(response) {
-                console.log(JSON.stringify(response));
-            });
         })();
 
         $("#btn-access").click(function(){
