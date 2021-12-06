@@ -192,140 +192,14 @@
             <div class="pure-u-1-3"></div>
         </div>
 
-        <script>
-            (function initState(){
-                showOnly(["bar", "access"])
-            })();
-
-            $("#btn-access").click(function(){
-                $.ajax({
-                    async: false,
-                    url: "https://authwino.herokuapp.com/login",
-                    data: JSON.stringify({
-                            email: $("#email").val(),
-                            password: $("#password").val()
-                          }),
-                    success: function(data){
-                                sessionStorage.setItem("zibib", data);
-                                showOnly(["search"]);                                
-                             },
-                    error: function(xhr, status, err){
-                        alert("Error " + status + ": "+console.err);
-                    },
-                    contentType: "application/json",
-                    type: "POST"
-                });
-            });
-
-            $("#btn-register").click(function(){
-                var passw = $("#rec_pw").val()
-                var repeatpassw = $("#rec_repeat_pw").val()
-                if(passw != repeatpassw) {
-                    alert("password and confirmation don't match!");
-                    alert(passw + " != " + repeatpassw);
-                    return;
-                }
-                $.ajax({
-                    async: false,
-                    url: "https://authwino.herokuapp.com/register",
-                    data: JSON.stringify({
-                            email: $("#rec_email").val(),
-                            password: $("#rec_pw").val()
-                          }),
-                    success: function(data){
-                                sessionStorage.setItem("zibib", data);
-                                showOnly(["bar", "access"]);
-                             },
-                    error: function(xhr, status, err){
-                        alert("Error " + status + ": "+console.err);
-                    },
-                    contentType: "application/json",
-                    type: "POST"
-                });
-            });
-
-            $("#searchForm").submit(function() {
-                pair($("#searchText").get(0));
-                return false;
-            });
-
-            $(".title").click(function(e){
-                if(!sessionStorage.getItem('zibib')) {
-                    window.location.reload();
-                }
-                else {
-                    $("#recipe_text").val("");
-                    showOnly(["search", "searchForm"]);
-                }
-
-            });
-
-            $("#lnk-register").click(function(){
-                $("#wineList").html("");
-                showOnly(["bar", "register"]);
-            });
-
-            $("#lnk-login").click(function(){
-                $("#wineList").html("");
-                showOnly(["bar", "access"]);
-            });
-
-            
-
-            function pair(input) {
-                wines = fetchWines(); 
-                content = ''
-                wines.forEach(element => {
-                  content += buildCard(element);
-                });
-                if(content === '') {
-                    content = "No results... click on the logo and try again!"
-                } else {
-                    content = '<h5>Pairing for: <i>"'+$("#recipe_text").val()+'"</i></h5>' + content
-                }
-                $("#wineList").html(content);
-                
-                showOnly(["results"]);
-            }
-
-            function buildCard(wine) {
-                var region = wine.region
-                return '<div class="card"> <b>' + wine.name +'</b> <br/> ' + wine.category + ' - ' + wine.sweetness + ' - ' + wine.style + ' - ' + region + '</div>';
-            }
-
-            function fetchWines() {
-                wines = [];
-                $.ajax( {
-                    async: false,
-                    type: 'Get',
-                    url: 'https://winot.herokuapp.com/match?foodDescription=' + $("#recipe_text").val(),
-                    headers: { 'authorization': 'bearer ' + sessionStorage.getItem("zibib") },
-                    success: function(data) {
-                        data.forEach(function(w){
-                            wines.push(w);
-                        });
-                    }
-                });
-                return wines;
-            }
-
-            function showOnly(divs) {
-                var allDivs = ["bar", "access", "register", "search", "results"];
-                allDivs.forEach(function(d){
-                    if(divs.indexOf(d) >= 0) {
-                        $("#"+d).show();
-                    }
-                    else $("#"+d).hide();
-                });
-            }
-        </script>
+        
     </body>
     <div id="fb-root"></div>
     <script async defer 
                 crossorigin="anonymous"
                 src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v12.0&appId=1273416273099991&autoLogAppEvents=1" 
                 nonce="VE1GYhZE">
-/*
+
                 $(".fb-login-button").click( () => {
                     FB.login(function(response){
                         if (response.authResponse) {
@@ -335,6 +209,135 @@
                         }
                     });
                 });
-*/
-        </script>
+    </script>
+    <script>
+        (function initState(){
+            showOnly(["bar", "access"])
+            FB.getLoginStatus(function(response) {
+                console.log(JSON.stringify(response));
+            });
+        })();
+
+        $("#btn-access").click(function(){
+            $.ajax({
+                async: false,
+                url: "https://authwino.herokuapp.com/login",
+                data: JSON.stringify({
+                        email: $("#email").val(),
+                        password: $("#password").val()
+                    }),
+                success: function(data){
+                            sessionStorage.setItem("zibib", data);
+                            showOnly(["search"]);                                
+                        },
+                error: function(xhr, status, err){
+                    alert("Error " + status + ": "+console.err);
+                },
+                contentType: "application/json",
+                type: "POST"
+            });
+        });
+
+        $("#btn-register").click(function(){
+            var passw = $("#rec_pw").val()
+            var repeatpassw = $("#rec_repeat_pw").val()
+            if(passw != repeatpassw) {
+                alert("password and confirmation don't match!");
+                alert(passw + " != " + repeatpassw);
+                return;
+            }
+            $.ajax({
+                async: false,
+                url: "https://authwino.herokuapp.com/register",
+                data: JSON.stringify({
+                        email: $("#rec_email").val(),
+                        password: $("#rec_pw").val()
+                    }),
+                success: function(data){
+                            sessionStorage.setItem("zibib", data);
+                            showOnly(["bar", "access"]);
+                        },
+                error: function(xhr, status, err){
+                    alert("Error " + status + ": "+console.err);
+                },
+                contentType: "application/json",
+                type: "POST"
+            });
+        });
+
+        $("#searchForm").submit(function() {
+            pair($("#searchText").get(0));
+            return false;
+        });
+
+        $(".title").click(function(e){
+            if(!sessionStorage.getItem('zibib')) {
+                window.location.reload();
+            }
+            else {
+                $("#recipe_text").val("");
+                showOnly(["search", "searchForm"]);
+            }
+
+        });
+
+        $("#lnk-register").click(function(){
+            $("#wineList").html("");
+            showOnly(["bar", "register"]);
+        });
+
+        $("#lnk-login").click(function(){
+            $("#wineList").html("");
+            showOnly(["bar", "access"]);
+        });
+
+        
+
+        function pair(input) {
+            wines = fetchWines(); 
+            content = ''
+            wines.forEach(element => {
+            content += buildCard(element);
+            });
+            if(content === '') {
+                content = "No results... click on the logo and try again!"
+            } else {
+                content = '<h5>Pairing for: <i>"'+$("#recipe_text").val()+'"</i></h5>' + content
+            }
+            $("#wineList").html(content);
+            
+            showOnly(["results"]);
+        }
+
+        function buildCard(wine) {
+            var region = wine.region
+            return '<div class="card"> <b>' + wine.name +'</b> <br/> ' + wine.category + ' - ' + wine.sweetness + ' - ' + wine.style + ' - ' + region + '</div>';
+        }
+
+        function fetchWines() {
+            wines = [];
+            $.ajax( {
+                async: false,
+                type: 'Get',
+                url: 'https://winot.herokuapp.com/match?foodDescription=' + $("#recipe_text").val(),
+                headers: { 'authorization': 'bearer ' + sessionStorage.getItem("zibib") },
+                success: function(data) {
+                    data.forEach(function(w){
+                        wines.push(w);
+                    });
+                }
+            });
+            return wines;
+        }
+
+        function showOnly(divs) {
+            var allDivs = ["bar", "access", "register", "search", "results"];
+            allDivs.forEach(function(d){
+                if(divs.indexOf(d) >= 0) {
+                    $("#"+d).show();
+                }
+                else $("#"+d).hide();
+            });
+        }
+    </script>
 </html>
