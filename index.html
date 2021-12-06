@@ -14,6 +14,10 @@
                 src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v12.0&appId=1273416273099991&autoLogAppEvents=1" 
                 nonce="VE1GYhZE">
 
+                FB.getLoginStatus(function(response) {
+                    statusChangeCallback(response);
+                });
+
                 $(".fb-login-button").click( () => {
                     FB.login(function(response){
                         if (response.authResponse) {
