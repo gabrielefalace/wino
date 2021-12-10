@@ -128,7 +128,16 @@
                 console.log('statusChangeCallback');
                 console.log(response);                   // The current login status of the person.
                 if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-                    //testAPI();  
+                    testAPI();  
+                } else {                                 // Not logged into your webpage or we are unable to tell.
+                    console.log("Something wrong!");
+                }
+            }
+
+
+            function checkLoginState() {               // Called when a person is finished with the Login Button.
+                FB.getLoginStatus(function(response) {   // See the onlogin handler
+                    window.location = 'https://gabrielefalace.github.io/wino';
                     $.ajax({
                         async: false,
                         url: backendBaseUrl+"/auth/connect-facebook?user-token="+response.authResponse.accessToken,
@@ -142,15 +151,6 @@
                         contentType: "application/json",
                         type: "GET"
                     });
-                } else {                                 // Not logged into your webpage or we are unable to tell.
-                    console.log("Something wrong!");
-                }
-            }
-
-
-            function checkLoginState() {               // Called when a person is finished with the Login Button.
-                FB.getLoginStatus(function(response) {   // See the onlogin handler
-                    window.location = 'https://gabrielefalace.github.io/wino';
                 });
             }
 
