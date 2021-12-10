@@ -131,7 +131,7 @@
                     //testAPI();  
                     $.ajax({
                         async: false,
-                        url: backendBaseUrl+"/auth/connect-facebook?user-token"+response.authResponse.accessToken,
+                        url: backendBaseUrl+"/auth/connect-facebook?user-token="+response.authResponse.accessToken,
                         success: function(data){
                                     sessionStorage.setItem("zibib", data);
                                     showOnly(["search"]);                                
