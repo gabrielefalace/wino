@@ -122,11 +122,26 @@
     <body>  
 
         <script>
+            let backendBaseUrl = "https://wino.azurewebsites.net";
+
             function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
                 console.log('statusChangeCallback');
                 console.log(response);                   // The current login status of the person.
                 if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-                    testAPI();  
+                    //testAPI();  
+                    $.ajax({
+                        async: false,
+                        url: backendBaseUrl+"/auth/connect-facebook?user-token"+response.authResponse.accessToken,
+                        success: function(data){
+                                    sessionStorage.setItem("zibib", data);
+                                    showOnly(["search"]);                                
+                                },
+                        error: function(xhr, status, err){
+                            alert("Error " + status + ": "+console.err);
+                        },
+                        contentType: "application/json",
+                        type: "GET"
+                    });
                 } else {                                 // Not logged into your webpage or we are unable to tell.
                     console.log("Something wrong!");
                 }
@@ -249,7 +264,7 @@
         $("#btn-access").click(function(){
             $.ajax({
                 async: false,
-                url: "https://authwino.herokuapp.com/login",
+                url: backendBaseUrl+"/auth/login",
                 data: JSON.stringify({
                         email: $("#email").val(),
                         password: $("#password").val()
@@ -276,7 +291,7 @@
             }
             $.ajax({
                 async: false,
-                url: "https://authwino.herokuapp.com/register",
+                url: backendBaseUrl+"/auth/register",
                 data: JSON.stringify({
                         email: $("#rec_email").val(),
                         password: $("#rec_pw").val()
@@ -347,7 +362,7 @@
             $.ajax( {
                 async: false,
                 type: 'Get',
-                url: 'https://winot.herokuapp.com/match?foodDescription=' + $("#recipe_text").val(),
+                url: backendBaseUrl + '/match?foodDescription=' + $("#recipe_text").val(),
                 headers: { 'authorization': 'bearer ' + sessionStorage.getItem("zibib") },
                 success: function(data) {
                     data.forEach(function(w){
