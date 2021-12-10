@@ -122,6 +122,17 @@
     <body>  
 
         <script>
+
+            function showOnly(divs) {
+                var allDivs = ["bar", "access", "register", "search", "results"];
+                allDivs.forEach(function(d){
+                    if(divs.indexOf(d) >= 0) {
+                        $("#"+d).show();
+                    }
+                    else $("#"+d).hide();
+                });
+            }
+
             let backendBaseUrl = "https://wino.azurewebsites.net";
 
             function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
