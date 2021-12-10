@@ -123,16 +123,6 @@
 
         <script>
 
-            function showOnly(divs) {
-                var allDivs = ["bar", "access", "register", "search", "results"];
-                allDivs.forEach(function(d){
-                    if(divs.indexOf(d) >= 0) {
-                        $("#"+d).show();
-                    }
-                    else $("#"+d).hide();
-                });
-            }
-
             let backendBaseUrl = "https://wino.azurewebsites.net";
 
             function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
@@ -148,13 +138,14 @@
 
             function checkLoginState() {               // Called when a person is finished with the Login Button.
                 FB.getLoginStatus(function(response) {   // See the onlogin handler
-                    window.location = 'https://gabrielefalace.github.io/wino';
+                    //window.location = 'https://gabrielefalace.github.io/wino';
                     $.ajax({
                         async: false,
                         url: backendBaseUrl+"/auth/connect-facebook?user-token="+response.authResponse.accessToken,
                         success: function(data){
                                     sessionStorage.setItem("zibib", data);
-                                    showOnly(["search"]);                                
+                                    $("#recipe_text").val("");
+                                    showOnly(["search", "searchForm"]);                                
                                 },
                         error: function(xhr, status, err){
                             alert("Error " + status + ": "+console.err);
